@@ -1,10 +1,17 @@
 import React from 'react'
+import StyledAbout from './styles'
 
-const About: React.FC = () => {
+type AboutProps = {
+    sectionTitle: string;
+    id: string;
+}
 
-    return (<>
+const About: React.FC<React.PropsWithChildren<AboutProps>> = (props) => {
 
-    </>)
+    return (<StyledAbout.StyledSection id={props.id}>
+        <StyledAbout.StyledH2>{props.sectionTitle}</StyledAbout.StyledH2>
+        {props.children}
+    </StyledAbout.StyledSection>)
 }
 
 export default About

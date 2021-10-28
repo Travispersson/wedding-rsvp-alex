@@ -1,14 +1,16 @@
 import React from 'react';
 import GlobalStyle from "./styles/global"
 import HomePage from './components/HomePage';
+import { useScrollYPosition } from 'react-use-scroll-position';
 
 const App: React.FC = () => {
+
+
+  const scrollY = useScrollYPosition();
   return (
     <>
       <GlobalStyle />
-      <HomePage>
-
-      </HomePage>
+      <HomePage scrollY={scrollY} />
     </>
   );
 }
