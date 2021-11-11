@@ -29,7 +29,7 @@ export default function NavBar(props) {
         borderBottom: "medium none",
         transition: "background-color 300ms ease-in-out"
     } : {};
-    console.log(open)
+
     const links = () => {
         return (
             <>

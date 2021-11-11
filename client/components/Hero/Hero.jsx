@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic"
 import styles from "../../styles/Hero.module.scss"
-import NavBar from "../NavBar/NavBar"
 
-
+const NavBar = dynamic(() => import("./../NavBar/NavBar"), {
+    ssr: false,
+});
 
 export default function Hero(props) {
 
