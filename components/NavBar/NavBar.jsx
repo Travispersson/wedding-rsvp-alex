@@ -1,4 +1,4 @@
-import styles from "../../styles/NavBar.module.scss"
+import styles from "../../styles/Navbar.module.scss"
 import { useState } from "react";
 import { Link } from 'react-scroll'
 
