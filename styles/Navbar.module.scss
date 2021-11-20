@@ -120,16 +120,3 @@
         }
     }
 }
-
-.whenScrollNavBar {
-    position: fixed;
-    background-color: rgba(50, 50, 59, 0.7);
-    z-index: 999;
-    width: 100%;
-    border-bottom: medium none;
-    transition: background-color 300ms ease-in-out;
-}
-
-.whenScrollUl {
-    padding: 10px 0px;
-}

@@ -14,11 +14,12 @@ export default function NavBar(props) {
         } else {
             document.body.classList.add('stopScrolling')
         }
+
         setOpen(!open);
     };
 
     const stylesUl = props.scrollY >= 20 ? {
-        padding: "10px 0px"
+        padding: "5px 0px"
     } : {};
 
     const stylesNavBar = props.scrollY >= 20 ? {
@@ -44,10 +45,10 @@ export default function NavBar(props) {
     const menu = () => {
         return (
             <ul style={open ? { ...stylesUl, height: "100%", top: "0%", padding: "0" } : stylesUl}>
-                {open ? <div>{links()}</div> : <div className={open ? "" : styles.hideOnSmallScreen}>
+                <div className={open ? "" : styles.hideOnSmallScreen}>
                     {links()}
-                </div>}
-                <div className={styles.hamburgerMenu} onClick={() => handleClick()} style={open ? { position: "absolute", top: "25px", right: "25px" } : {}}>
+                </div>
+                <div className={styles.hamburgerMenu} onClick={() => handleClick()} style={open ? { position: "absolute", top: "38px", right: "20px" } : {}}>
                     <div style={{ transform: open ? 'rotate(45deg)' : 'rotate(0)' }} />
                     <div style={{
                         opacity: open ? '0' : '1',
@@ -60,7 +61,7 @@ export default function NavBar(props) {
     }
 
     return (
-        <nav style={open ? {} : stylesNavBar} className={open ? styles.overlay : styles.navBar} onClick={() => open && handleClick()}>
+        <nav style={stylesNavBar} className={open ? styles.overlay : styles.navBar} onClick={() => open && handleClick()}>
             {menu()}
         </nav>
     )

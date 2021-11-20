@@ -1,7 +1,6 @@
 import styles from "../../styles/Modal.module.scss"
 
 export default function Modal(props) {
-    console.log(props.open)
     return (
         <section id="modal" className={styles.modal} style={{ display: props.open ? '' : 'none' }}>
             <div className={styles.modalContent}>
