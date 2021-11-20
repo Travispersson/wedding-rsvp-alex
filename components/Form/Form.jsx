@@ -45,7 +45,7 @@ export default function Form() {
                 console.log(response);
                 if (response.status === 200) {
                     //todo show positive message
-                    toast.success('You have now successfully RSVP:d!', {
+                    toast.success('You have now successfully RSVP\'d!', {
                         position: "top-center",
                         autoClose: 5000,
                         hideProgressBar: false,
@@ -78,7 +78,7 @@ export default function Form() {
                 });
             }
         } else {
-            toast.error('Please fill in all the required fields!', {
+            toast.error('Please fill in all the fields!', {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -99,8 +99,8 @@ export default function Form() {
 
     return (<form className={styles.formContainer} onSubmit={handleSubmit}>
         <div className={styles.pair}>
-            <input placeholder="name" className={`${styles.inputText}`} {...name} />
-            <input placeholder="email" className={`${styles.inputText}`} {...email} />
+            <input placeholder="Name" className={`${styles.inputText}`} {...name} />
+            <input placeholder="Email" className={`${styles.inputText}`} {...email} />
         </div>
         <div className={styles.pair}>
             <input placeholder="How many are you bringing along?" pattern="[0-9]" className={`${styles.inputNumber}`} {...extras} />
