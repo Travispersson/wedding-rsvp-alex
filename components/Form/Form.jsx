@@ -17,7 +17,7 @@ export default function Form() {
     };
 
     const { error: nameError, reset: nameReset, ...name } = useField('text', [notEmptyChecker]);
-    const { error: extrasError, reset: extrasReset, ...extras } = useField('number', [(num) => num !== "" && num > 0]);
+    const { error: extrasError, reset: extrasReset, ...extras } = useField('number', [(num) => num !== "" && num >= 0]);
     const { error: emailError, reset: emailReset, ...email } = useField('email', [notEmptyChecker, emailChecker]);
     const { error: rsvpError, reset: rsvpReset, ...rsvp } = useField('text', [notEmptyChecker]);
 
