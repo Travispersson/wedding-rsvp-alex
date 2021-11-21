@@ -34,17 +34,18 @@ export default function Form() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!nameError && !extrasError && !emailError && !rsvpError) {
+        if (checkErrors()) {
             try {
-                const response = await axios.post('/api/rspv', {
+                const body = {
                     name: name.value,
                     email: email.value,
                     extras: extras.value,
-                    inviteCode: rsvp.value.replace(/ /g,'').toLowerCase()
-                });
-                console.log(response);
+                    inviteCode: rsvp.value.replace(/ /g, '').toLowerCase()
+                };
+                rsvpReset(); //hinder duplicate calls.
+
+                const response = await axios.post('/api/rspv', body);
                 if (response.status === 200) {
-                    //todo show positive message
                     toast.success('You have now successfully RSVP\'d!', {
                         position: "top-center",
                         autoClose: 5000,
@@ -103,7 +104,7 @@ export default function Form() {
             <input placeholder="Email" className={`${styles.inputText}`} {...email} />
         </div>
         <div className={styles.pair}>
-            <input placeholder="How many are you bringing along?" pattern="[0-9]" className={`${styles.inputNumber}`} {...extras} />
+            <input placeholder="How many are you bringing along?" className={`${styles.inputNumber}`} {...extras} />
             <input placeholder="Invite code" className={`${styles.inputText}`} {...rsvp} />
         </div>
         {button()}
