@@ -98,3 +98,18 @@
         width: 80%;
     }
 }
+
+.row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    label, input {
+        margin: 8px;
+    }
+    @media (max-width: 870px) {
+        width: 80%;
+    }
+    input[type=checkbox] {
+        transform: scale(1.3);
+    }
+}

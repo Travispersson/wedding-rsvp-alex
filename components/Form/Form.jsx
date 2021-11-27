@@ -3,6 +3,7 @@ import useField from "../../hooks/useField";
 import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from "react";
 
 
 export default function Form() {
@@ -15,20 +16,26 @@ export default function Form() {
     const notEmptyChecker = (text) => {
         return text.length > 0
     };
-
+    const [attending, setAttending] = useState(false);
+    const [successful, setSuccessful] = useState(false);
     const { error: nameError, reset: nameReset, ...name } = useField('text', [notEmptyChecker]);
     const { error: extrasError, reset: extrasReset, ...extras } = useField('number', [(num) => num !== "" && num >= 0]);
     const { error: emailError, reset: emailReset, ...email } = useField('email', [notEmptyChecker, emailChecker]);
     const { error: rsvpError, reset: rsvpReset, ...rsvp } = useField('text', [notEmptyChecker]);
 
     const checkErrors = () => {
-        return !nameError && !extrasError && !emailError && !rsvpError;
+        if (attending) {
+            return !nameError && !extrasError && !emailError && !rsvpError;
+        } else {
+            return !nameError && !emailError && !rsvpError;
+        }
     }
     const resetFields = () => {
         nameReset();
         extrasReset();
         emailReset();
         rsvpReset();
+        setAttending(false);
     }
 
     const handleSubmit = async (e) => {
@@ -40,7 +47,8 @@ export default function Form() {
                     name: name.value,
                     email: email.value,
                     extras: extras.value,
-                    inviteCode: rsvp.value.replace(/ /g, '').toLowerCase()
+                    inviteCode: rsvp.value.replace(/ /g, '').toLowerCase(),
+                    attending: attending ? 'yes' : 'no'
                 };
                 rsvpReset(); //hinder duplicate calls.
 
@@ -55,6 +63,7 @@ export default function Form() {
                         draggable: true,
                         progress: undefined,
                     });
+                    setSuccessful(true)
                     resetFields();
                 } else {
                     toast.error(response.data.error, {
@@ -91,34 +100,40 @@ export default function Form() {
         }
     }
 
-
-
     const button = () => {
         return (<button onClick={handleSubmit} type='submit' className={`${styles.buttonCursor} ${styles.buttonCommon} ${!checkErrors() ? styles.isDisabled : ''}`}>RSVP</button>)
     }
 
+    return (
 
-    return (<form className={styles.formContainer} onSubmit={handleSubmit}>
-        <div className={styles.pair}>
-            <input placeholder="Name" className={`${styles.inputText}`} {...name} />
-            <input placeholder="Email" className={`${styles.inputText}`} {...email} />
-        </div>
-        <div className={styles.pair}>
-            <input placeholder="How many are you bringing along?" className={`${styles.inputNumber}`} {...extras} />
-            <input placeholder="Invite code" className={`${styles.inputText}`} {...rsvp} />
-        </div>
-        {button()}
-        <ToastContainer
-            position="bottom-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-        />
-    </form>
+        <form className={styles.formContainer} onSubmit={handleSubmit}>
+            <div className={styles.pair}>
+                <input placeholder="Name" className={`${styles.inputText}`} {...name} />
+                <input placeholder="Email" className={`${styles.inputText}`} {...email} />
+            </div>
+            <div className={styles.row}>
+                <label>
+                    Are you attending the wedding?
+                    <input type="checkbox" defaultChecked={false} onChange={() => setAttending(!attending)} />
+                </label>
+            </div>
+            <div className={styles.pair}>
+                {attending && <input placeholder="How many are you bringing along?" className={`${styles.inputNumber}`} {...extras} />}
+                <input placeholder="Invite code" className={`${styles.inputText}`} {...rsvp} />
+            </div>
+
+            {successful ? "" : button()}
+            <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+        </form>
     )
 }
