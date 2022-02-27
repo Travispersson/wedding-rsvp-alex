@@ -25,13 +25,13 @@ export default function Home() {
       <About id="wedding" sectionTitle={"wedding"}>
         <div className={styles.infoContainer}>
           <div className={styles.info} >
-            <h3 className={styles.title} >Ceremony(TBA)</h3>
-            <p className={styles.time}>0:00PM - 0:00PM</p>
+            <h3 className={styles.title} >Ceremony</h3>
+            <p className={styles.time}>16:00PM - 17:30PM</p>
             <p className={styles.p}>Enkipo Seaview <br />Stalos, Chania<br /></p>
           </div>
           <div className={styles.info} >
-            <h3 className={styles.title} >Reception(TBA)</h3>
-            <p className={styles.time}>0:00PM - 0:00PM</p>
+            <h3 className={styles.title} >Reception</h3>
+            <p className={styles.time}>17:30PM - 2:00AM</p>
             <p className={styles.p}>Enkipo Seaview <br />Stalos, Chania<br /></p>
           </div>
         </div>
